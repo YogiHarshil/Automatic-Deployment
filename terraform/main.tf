@@ -43,7 +43,7 @@ resource "aws_security_group" "allow_ssh_http" {
 resource "aws_instance" "nginx_server" {
   ami           = "ami-00bb6a80f01f03502" 
   instance_type = "t2.micro"
-  key_name      = "my-key"
+  key_name      = "key"
   
   # Use the existing security group if it exists, otherwise use the newly created one
   vpc_security_group_ids = [

@@ -1,4 +1,4 @@
-name: Deploy Nginx on AWS
+name: Deploy Website on AWS
 
 on:
   push:
@@ -34,9 +34,9 @@ jobs:
       - name: Configure SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/my-key.pem
-          chmod 600 ~/.ssh/my-key.pem
-          ssh-keygen -y -f ~/.ssh/my-key.pem > ~/.ssh/my-key.pub || echo "Invalid key"
+          echo "${{ secrets.PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/key.pem
+          chmod 600 ~/.ssh/key.pem
+          ssh-keygen -y -f ~/.ssh/key.pem > ~/.sshkey.pub || echo "Invalid key"
 
       - name: Add SSH Host Key to Known Hosts
         run: |
@@ -45,4 +45,4 @@ jobs:
       - name: Run Ansible Playbook
         run: |
           cd ansible-setup
-          ansible-playbook -i inventory nginx-setup.yml
+          ansible-playbook -i inventory setup.yml
