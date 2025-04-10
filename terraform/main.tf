@@ -43,7 +43,7 @@ resource "aws_security_group" "allow_ssh_http" {
 resource "aws_instance" "nginx_server" {
   ami           = "ami-00bb6a80f01f03502" 
   instance_type = "t2.micro"
-  key_name      = "key"
+  key_name      = "auto-key"
   
   # Use the existing security group if it exists, otherwise use the newly created one
   vpc_security_group_ids = [
@@ -58,7 +58,7 @@ resource "aws_instance" "nginx_server" {
   provisioner "local-exec" {
     command = <<EOT
       echo "[web]" > ../ansible-setup/inventory
-      echo "nginx-server ansible_host=${self.public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/key.pem " >> ../ansible-setup/inventory
+      echo "nginx-server ansible_host=${self.public_ip} ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/auto-key.pem " >> ../ansible-setup/inventory
     EOT
   }
 }
