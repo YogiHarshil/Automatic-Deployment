@@ -1,1 +1,1 @@
-Automatic Deployment of Nginx on EC2 using Terraform and Ansible.
+Automatic Deployment of Web-site on Nginx server  on EC2 using Terraform and Ansible.
